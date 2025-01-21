@@ -20,4 +20,23 @@ public class TaskService {
     public Task getTaskById(Long taskId) {
         return taskRepository.findById(taskId).orElseThrow(()->new TaskNotFoundException("Task not found" + taskId));
     }
+    public Task createTask(Task task) {
+        return taskRepository.save(task);
+    }
+    public Task updateTask(Long id, Task taskDetails) {
+        Task task = taskRepository.findById(id).orElseThrow(()->new TaskNotFoundException("Task not found" + id));
+
+        task.setTitle(taskDetails.getTitle());
+        task.setDescription(taskDetails.getDescription());
+        task.setPriority(taskDetails.getPriority());
+        task.setStatus(taskDetails.getStatus());
+
+        return taskRepository.save(task);
+
+    }
+    public void deleteTask(Long id) {
+        Task task = taskRepository.findById(id).orElseThrow(()->new TaskNotFoundException("Task not found" + id));
+        taskRepository.deleteById(id);
+
+    }
 }

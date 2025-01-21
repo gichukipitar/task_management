@@ -1,7 +1,10 @@
 spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
   application:
     name: Task Management
-
   data:
     mongodb:
-      uri: mongodb://localhost/taskdb
+      uri: mongodb://admin:admin@localhost:27017/taskdb
+  main:
+    allow-bean-definition-overriding: true
